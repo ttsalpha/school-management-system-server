@@ -10,18 +10,7 @@ var userRouter = require('./routes/user');
 
 var app = express();
 
-var allowedOrigins = ['http://localhost:3000']; //localhost
-// var allowedOrigins = ['https://thaobone.herokuapp.com/']; // online
-app.use(cors({
-  origin: function (origin, callback) {
-    if (allowedOrigins.indexOf(origin) === -1) {
-      var msg = "not allow"
-      return callback(new Error(msg), false)
-    }
-    return callback(null, true);
-  }
-}))
-
+app.use(cors())
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
