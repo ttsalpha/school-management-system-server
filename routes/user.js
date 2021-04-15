@@ -41,7 +41,7 @@ router.post('/login', (req, res) => {
       role: userData.role
     }, accessTokenSecret, {expiresIn: '2000'});
     const refreshToken = jwt.sign({
-      sername: userData.username,
+      username: userData.username,
       role: userData.role
     }, refreshTokenSecret);
 
