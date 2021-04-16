@@ -7,8 +7,8 @@ const cors = require('cors');
 const bodyParser = require("body-parser");
 
 const indexRouter = require('./routes/index');
-const userRouter = require('./routes/user');
-const accountRouter = require('./routes/account');
+const userRouter = require('./routes/user.router');
+const accountRouter = require('./routes/account.router');
 
 const app = express();
 
@@ -26,10 +26,8 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(bodyParser.urlencoded({extended: true}));
 
 app.use('/', indexRouter);
-// app.use('/user', userRouter);
+app.use('/user', userRouter);
 app.use('/account', accountRouter);
-
-
 
 
 // catch 404 and forward to error handler
