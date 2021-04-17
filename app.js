@@ -10,6 +10,7 @@ const indexRouter = require('./routes/index');
 const userRouter = require('./routes/user.router');
 const accountRouter = require('./routes/account.router');
 const profileRouter = require('./routes/profile.router');
+const teacherRouter = require('./routes/teacher.router');
 
 const app = express();
 
@@ -29,7 +30,8 @@ app.use(bodyParser.urlencoded({extended: true}));
 app.use('/', indexRouter);
 app.use('/user', userRouter);
 app.use('/account', accountRouter);
-app.use('/profile', profileRouter)
+app.use('/profile', profileRouter);
+app.use('/teacher', teacherRouter);
 
 
 // catch 404 and forward to error handler
