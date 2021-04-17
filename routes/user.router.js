@@ -5,20 +5,7 @@ const jwt = require('jsonwebtoken');
 const router = express.Router();
 
 const Account = require('../models/account.model')
-const accountRouter = require("../controllers/account.controller");
 
-// const userData = [
-//   {
-//     username: 'admin',
-//     password: '123',
-//     role: 'admin'
-//   },
-//   {
-//     username: 'member',
-//     password: '321',
-//     role: 'member'
-//   }
-// ];
 const userData = {};
 
 let refreshTokens = [];
@@ -36,7 +23,6 @@ router.post('/login', (req, res) => {
   console.log('ok1' + userData);
 
   Account.findByUsername(username, (err, userData) => {
-    console.log("abc")
     if (err) {
       if (err.kind === "not_found") {
         res.status(404).send({
@@ -60,10 +46,13 @@ router.post('/login', (req, res) => {
         }, refreshTokenSecret);
 
         refreshTokens.push(refreshToken);
+        console.log(userData)
 
         res.json({
           accessToken,
           refreshToken,
+          "teacherID": userData.teacherID,
+          "userRole": userData.role
         });
       } else {
         res.send('Username or password incorrect');
