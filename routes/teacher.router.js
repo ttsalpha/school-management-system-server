@@ -13,4 +13,7 @@ router.get("/search/:ID", teacherRouter.findOne);
 // Create a new Teacher
 router.post("/create", teacherRouter.create);
 
+// Delete a Teacher with teacher ID
+router.delete("/delete/:ID", teacherRouter.delete);
+
 module.exports = router;

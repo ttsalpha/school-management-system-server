@@ -43,4 +43,23 @@ Teacher.create = (newTeacher, result) => {
   });
 };
 
+Teacher.delete = (teacherID, result) => {
+  sql.query("delete from teacher where teacherID = ?", teacherID, (err, res) => {
+    if (err) {
+      console.log("error: ", err);
+      result(null, err);
+      return;
+    }
+
+    if (res.affectedRows === 0) {
+      // not found Account with the id
+      result({kind: "not_found"}, null);
+      return;
+    }
+
+    console.log("deleted teacher with teacher id: ", teacherID);
+    result(null, res);
+  });
+};
+
 module.exports = Teacher;

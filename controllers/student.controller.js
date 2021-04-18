@@ -33,3 +33,20 @@ exports.findOne = (req, res) => {
     } else res.send(data);
   });
 };
+
+// Delete a Student with the specified student ID in the request
+exports.delete = (req, res) => {
+  Student.delete(req.params.ID, (err) => {
+    if (err) {
+      if (err.kind === "not_found") {
+        res.status(404).send({
+          message: `Not found Student with id ${req.params.ID}.`
+        });
+      } else {
+        res.status(500).send({
+          message: "Could not delete Student with id " + req.params.ID
+        });
+      }
+    } else res.send({message: `Student was deleted successfully! ID: ${req.params.ID}`});
+  });
+};

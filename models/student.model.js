@@ -1,7 +1,8 @@
 const sql = require("./connection");
 
 // constructor
-const Student = function () {};
+const Student = function () {
+};
 
 Student.getAll = (teacherID, role, result) => {
   const contextAdmin = "select studentID, fullName, className, gender,"
@@ -58,6 +59,25 @@ Student.findById = (studentID, result) => {
 
     // not found profile of a student with the id
     result({kind: "not_found"}, null);
+  });
+};
+
+Student.delete = (studentID, result) => {
+  sql.query("delete from student where studentID = ?", studentID, (err, res) => {
+    if (err) {
+      console.log("error: ", err);
+      result(null, err);
+      return;
+    }
+
+    if (res.affectedRows === 0) {
+      // not found Student with the id
+      result({kind: "not_found"}, null);
+      return;
+    }
+
+    console.log("deleted student with student id: ", studentID);
+    result(null, res);
   });
 };
 

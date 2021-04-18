@@ -69,3 +69,20 @@ exports.create = (req, res) => {
     else res.send(data);
   });
 };
+
+// Delete a Teacher with the specified teacher ID in the request
+exports.delete = (req, res) => {
+  Teacher.delete(req.params.ID, (err) => {
+    if (err) {
+      if (err.kind === "not_found") {
+        res.status(404).send({
+          message: `Not found Teacher with id ${req.params.ID}.`
+        });
+      } else {
+        res.status(500).send({
+          message: "Could not delete Customer with id " + req.params.ID
+        });
+      }
+    } else res.send({message: `Teacher was deleted successfully! ID: ${req.params.ID}`});
+  });
+};
