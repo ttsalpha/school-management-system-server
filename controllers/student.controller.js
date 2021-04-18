@@ -16,3 +16,20 @@ exports.findAll = (req, res) => {
     } else res.send(data);
   });
 };
+
+// Find a Profile of a student with a ID
+exports.findOne = (req, res) => {
+  Student.findById(req.params.ID, (err, data) => {
+    if (err) {
+      if (err.kind === "not_found") {
+        res.status(404).send({
+          message: `Not found Profile with id ${req.params.ID}.`
+        });
+      } else {
+        res.status(500).send({
+          message: "Error retrieving Profile with id " + req.params.ID
+        });
+      }
+    } else res.send(data);
+  });
+};

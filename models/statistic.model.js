@@ -1,14 +1,7 @@
 const sql = require("./connection");
 
 // constructor
-const Statistic = function (student) {
-  this.studentID = student.studentID;
-  this.fullName = student.fullName;
-  this.gradeMath = student.gradeMath;
-  this.gradeLiterature = student.gradeLiterature;
-  this.gradeEnglish = student.gradeEnglish;
-  this.total = student.total;
-};
+const Statistic = function () {};
 
 Statistic.getAll = (teacherID, role, result) => {
   const contextAdmin = "select a.studentID, s.fullName, a.gradeMath, a.gradeLiterature, a.gradeEnglish, "

@@ -1,12 +1,7 @@
 const sql = require("./connection");
 
 // constructor
-const Account = function (account) {
-  this.ID = account.ID;
-  this.username = account.username;
-  this.password = account.password;
-  this.role = account.role;
-};
+const Account = function () {};
 
 Account.findById = (ID, result) => {
   sql.query(`SELECT * FROM account WHERE teacherID = ${ID}`, (err, res) => {

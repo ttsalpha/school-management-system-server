@@ -1,13 +1,7 @@
 const sql = require("./connection");
 
 // constructor
-const Teacher = function (teacher) {
-  this.teacherID = teacher.teacherID;
-  this.fullName = teacher.fullName;
-  this.birthday = teacher.birthday;
-  this.position = teacher.position;
-  this.className = teacher.className;
-};
+const Teacher = function () {};
 
 Teacher.getAll = result => {
   sql.query("select t.teacherID, t.fullName, t.position,"

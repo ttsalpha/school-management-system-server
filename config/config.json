@@ -1,9 +1,0 @@
-{
-  "development": {
-    "username": "ttsalpha",
-    "password": "bonebone",
-    "database": "thaobone",
-    "host": "db4free.net",
-    "dialect": "mysql"
-  }
-}

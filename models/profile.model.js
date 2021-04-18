@@ -1,18 +1,7 @@
 const sql = require("./connection");
 
 // constructor
-const Profile = function (account) {
-  this.teacherID = account.teacherID;
-  this.fullName = account.fullName;
-  this.gender = account.gender;
-  this.birthday = account.birthday;
-  this.cccd = account.cccd;
-  this.position = account.position;
-  this.addressName = account.addressName;
-  this.phone = account.phone;
-  this.email = account.email;
-  this.reportsTo = account.reportsTo;
-};
+const Profile = function () {};
 
 Profile.findById = (teacherID, role, result) => {
   const contextAdmin = "select teacherID, fullName, gender,"
