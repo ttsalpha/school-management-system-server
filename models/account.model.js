@@ -1,7 +1,12 @@
 const sql = require("./connection");
 
 // constructor
-const Account = function () {};
+const Account = function (account) {
+  this.username = account.username;
+  this.password = account.password;
+  this.teacherID = account.teacherID;
+  this.role = account.role;
+};
 
 Account.findById = (ID, result) => {
   sql.query(`SELECT * FROM account WHERE teacherID = ${ID}`, (err, res) => {
@@ -51,6 +56,19 @@ Account.findByUsername = (username, result) => {
 
     // not found account with the id
     result({kind: "not_found"}, null);
+  });
+};
+
+Account.create = (newAccount, result) => {
+  sql.query("INSERT INTO account SET ?", newAccount, (err, res) => {
+    if (err) {
+      console.log("error: ", err);
+      result(err, null);
+      return;
+    }
+
+    console.log("created account: ", {id: res.insertId, ...newAccount});
+    result(null, {id: res.insertId, ...newAccount});
   });
 };
 

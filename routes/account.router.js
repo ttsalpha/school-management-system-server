@@ -13,4 +13,7 @@ router.get("/", accountRouter.findAll);
 // Retrieve a single Account with username
 router.get("/username/:username", accountRouter.findOneUsername);
 
+// Create a new Account
+router.post("/create", accountRouter.create);
+
 module.exports = router;

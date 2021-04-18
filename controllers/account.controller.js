@@ -45,3 +45,31 @@ exports.findOneUsername = (req, res) => {
     } else res.send(data);
   });
 };
+
+// Create and Save a new Account
+exports.create = (req, res) => {
+  // Validate request
+  if (!req.body) {
+    res.status(400).send({
+      message: "Content can not be empty!"
+    });
+  }
+
+  // Create a Account
+  const account = new Account({
+    username: req.body.username,
+    password: req.body.password,
+    teacherID: req.body.teacherID,
+    role: req.body.role
+  });
+
+  // Save Account in the database
+  Account.create(account, (err, data) => {
+    if (err)
+      res.status(500).send({
+        message:
+          err.message || "Some error occurred while creating the Account."
+      });
+    else res.send(data);
+  });
+};
