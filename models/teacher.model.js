@@ -62,4 +62,30 @@ Teacher.delete = (teacherID, result) => {
   });
 };
 
+Teacher.updateById = (teacher, result) => {
+  sql.query("UPDATE teacher SET " +
+    "fullName = ?, gender = ?, birthday = ?, cccd = ?" +
+    ",addressName = ?, phone = ?, email = ?  WHERE teacherID = ?",
+    [teacher.fullName, teacher.gender, teacher.birthday, teacher.cccd,
+      teacher.addressName, teacher.phone, teacher.email, teacher.teacherID],
+    (err, res) => {
+      if (err) {
+        console.log("error: ", err);
+        result(null, err);
+        return;
+      }
+
+      if (res.affectedRows === 0) {
+        // not found Teacher with the id
+        result({kind: "not_found"}, null);
+        return;
+      }
+
+      console.log("updated teacher: ", {...teacher});
+      result(null, {...teacher});
+    }
+  );
+};
+
+
 module.exports = Teacher;

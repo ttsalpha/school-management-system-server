@@ -1,7 +1,8 @@
 const sql = require("./connection");
 
 // constructor
-const Profile = function () {};
+const Profile = function () {
+};
 
 Profile.findById = (teacherID, role, result) => {
   const contextAdmin = "select teacherID, fullName, gender,"
@@ -11,7 +12,7 @@ Profile.findById = (teacherID, role, result) => {
     + teacherID + ";"
 
   const contextUser = "select t.teacherID, t.fullName, t.gender, "
-    + "concat(day(t.birthday), '/', month(t.birthday), '/', year(t.birthday)) as birthday, "
+    + "concat(year(t.birthday), '/', month(t.birthday), '/',day(t.birthday)) as birthday, "
     + "t.cccd, t.position, t.addressName, t.phone, t.email, "
     + "c.className from teacher t inner join class c on t.teacherID "
     + "= c.teacherID where t.teacherID = "
