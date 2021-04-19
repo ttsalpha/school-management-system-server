@@ -34,6 +34,37 @@ exports.findOne = (req, res) => {
   });
 };
 
+// Create and Save a new Student
+exports.create = (req, res) => {
+  // Validate request
+  if (!req.body) {
+    res.status(400).send({
+      message: "Content can not be empty!"
+    });
+  }
+
+  // Create a Student
+  const student = new Student({
+    studentID: req.body.studentID,
+    fullName: req.body.fullName,
+    gender: req.body.gender,
+    birthday: req.body.birthday,
+    cccd: req.body.cccd,
+    className: req.body.className,
+    addressName: req.body.addressName
+  });
+
+  // Save Student in the database
+  Student.create(student, (err, data) => {
+    if (err)
+      res.status(500).send({
+        message:
+          err.message || "Some error occurred while creating the Student."
+      });
+    else res.send(data);
+  });
+};
+
 // Delete a Student with the specified student ID in the request
 exports.delete = (req, res) => {
   Student.delete(req.params.ID, (err) => {

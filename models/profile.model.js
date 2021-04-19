@@ -6,7 +6,7 @@ const Profile = function () {
 
 Profile.findById = (teacherID, role, result) => {
   const contextAdmin = "select teacherID, fullName, gender,"
-    + "concat(day(birthday), '/', month(birthday), '/', year(birthday)) as birthday, "
+    + "concat(year(birthday), '/', month(birthday), '/', day(birthday)) as birthday, "
     + "cccd, position, addressName, phone, email from teacher "
     + " where teacherID = +"
     + teacherID + ";"

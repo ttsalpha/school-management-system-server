@@ -13,6 +13,8 @@ const profileRouter = require('./routes/profile.router');
 const teacherRouter = require('./routes/teacher.router');
 const studentRouter = require('./routes/student.router');
 const statisticRouter = require('./routes/statistic.router');
+const parentsRouter = require('./routes/parents.router');
+const achievementRouter = require('./routes/achievement.router');
 
 const app = express();
 
@@ -36,6 +38,8 @@ app.use('/profile', profileRouter);
 app.use('/teacher', teacherRouter);
 app.use('/student', studentRouter);
 app.use('/statistic', statisticRouter);
+app.use('/parents', parentsRouter);
+app.use('/achievement', achievementRouter);
 
 
 // catch 404 and forward to error handler

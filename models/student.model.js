@@ -1,7 +1,13 @@
 const sql = require("./connection");
 
 // constructor
-const Student = function () {
+const Student = function (student) {
+  this.studentID = student.studentID;
+  this.fullName = student.fullName;
+  this.gender = student.gender;
+  this.birthday = student.birthday;
+  this.className = student.className;
+  this.addressName = student.addressName
 };
 
 Student.getAll = (teacherID, role, result) => {
@@ -39,7 +45,7 @@ Student.getAll = (teacherID, role, result) => {
 
 Student.findById = (studentID, result) => {
   const context = "select s.studentID, s.fullName, s.className, s.gender," +
-    "date_format(s.birthday, \"%d/%m/%Y\") as birthday, s.addressName, " +
+    "date_format(s.birthday, \"%Y/%m/%d\") as birthday, s.addressName, " +
     "p.nameDad, p.phoneDad, p.jobDad, p.nameMom, p.phoneMom, p.jobMom from student" +
     " s  inner join parents p on s.studentID = p.studentID where s.studentID = " +
     +studentID + ";"
@@ -62,6 +68,19 @@ Student.findById = (studentID, result) => {
   });
 };
 
+Student.create = (newStudent, result) => {
+  sql.query("INSERT INTO student SET ?", newStudent, (err, res) => {
+    if (err) {
+      console.log("error: ", err);
+      result(err, null);
+      return;
+    }
+
+    console.log("created student: ", {id: res.insertId, ...newStudent});
+    result(null, {id: res.insertId, ...newStudent});
+  });
+};
+
 Student.delete = (studentID, result) => {
   sql.query("delete from student where studentID = ?", studentID, (err, res) => {
     if (err) {
@@ -80,5 +99,6 @@ Student.delete = (studentID, result) => {
     result(null, res);
   });
 };
+
 
 module.exports = Student;
