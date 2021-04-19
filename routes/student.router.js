@@ -16,4 +16,7 @@ router.post("/create", studentRouter.create);
 // Delete a Student with student ID
 router.delete("/delete/:ID", studentRouter.delete);
 
+// Update a Student with student ID
+router.put("/update", studentRouter.update);
+
 module.exports = router;

@@ -100,5 +100,29 @@ Student.delete = (studentID, result) => {
   });
 };
 
+Student.updateById = (student, result) => {
+  sql.query("UPDATE student SET " +
+    "fullName = ?, gender = ?, birthday = ?, className = ?" +
+    ",addressName = ? WHERE studentID = ?",
+    [student.fullName, student.gender, student.birthday,
+      student.className, student.addressName, student.studentID],
+    (err, res) => {
+      if (err) {
+        console.log("error: ", err);
+        result(null, err);
+        return;
+      }
+
+      if (res.affectedRows === 0) {
+        // not found Student with the id
+        result({kind: "not_found"}, null);
+        return;
+      }
+
+      console.log("updated student: ", {...student});
+      result(null, {...student});
+    }
+  );
+};
 
 module.exports = Student;

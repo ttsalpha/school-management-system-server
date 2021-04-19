@@ -24,4 +24,29 @@ Parents.create = (newParents, result) => {
   });
 };
 
+Parents.updateById = (parents, result) => {
+  sql.query("UPDATE parents SET " +
+    "nameMom = ?, jobMom = ?, phoneMom = ?," +
+    "nameDad = ? ,jobDad = ?, phoneDad = ? WHERE studentID = ?",
+    [parents.nameMom, parents.jobMom, parents.phoneMom,
+      parents.nameDad, parents.jobDad, parents.phoneDad, parents.studentID],
+    (err, res) => {
+      if (err) {
+        console.log("error: ", err);
+        result(null, err);
+        return;
+      }
+
+      if (res.affectedRows === 0) {
+        // not found Parents with the id
+        result({kind: "not_found"}, null);
+        return;
+      }
+
+      console.log("updated parents: ", {...parents});
+      result(null, {...parents});
+    }
+  );
+};
+
 module.exports = Parents;
