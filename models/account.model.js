@@ -72,4 +72,27 @@ Account.create = (newAccount, result) => {
   });
 };
 
+Account.updateById = (account, result) => {
+  sql.query("UPDATE account SET username = ?, password = ? WHERE teacherID = ?",
+    [account.username, account.password, account.teacherID],
+    (err, res) => {
+      if (err) {
+        console.log("error: ", err);
+        result(null, err);
+        return;
+      }
+
+      if (res.affectedRows === 0) {
+        // not found Account with the id
+        result({kind: "not_found"}, null);
+        return;
+      }
+
+      console.log("updated account: ", {...account});
+      result(null, {...account});
+    }
+  );
+};
+
+
 module.exports = Account;

@@ -16,4 +16,7 @@ router.get("/username/:username", accountRouter.findOneUsername);
 // Create a new Account
 router.post("/create", accountRouter.create);
 
+// Update a Account with student ID
+router.put("/update", accountRouter.update);
+
 module.exports = router;
